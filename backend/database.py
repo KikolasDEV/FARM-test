@@ -1,7 +1,7 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 from models import Task
 
-client = AsyncIOMotorClient('mongodb://localhost')
+client = AsyncIOMotorClient('mongodb://localhost:27017')
 # client.<nombre de la base de datos>
 database = client.farmtest 
 # database.<nombre de la colección/tabla>
@@ -9,6 +9,12 @@ collection = database.tasks
 
 async def get_one_task_id(id):
     task = await collection.find_one({'_id': id})
+    return task
+
+
+
+async def get_one_task(title):
+    task = await collection.find_one({'title': title})
     return task
 
 
